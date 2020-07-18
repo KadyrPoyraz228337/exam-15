@@ -3,6 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import Checkbox from "@material-ui/core/Checkbox";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,7 +24,7 @@ const FormElement = (
     {
         name, variant, required, id, label, autoFocus,
         onChange, type, autoComplete, error, helperText,
-        margin
+        margin, multiline, value
     }
 ) => {
     const classes = useStyles();
@@ -36,11 +38,13 @@ const FormElement = (
             helperText={textFieldError && helperText}
             autoComplete={autoComplete}
             name={name}
+            value={value}
             variant={variant}
             required={required}
             fullWidth
             id={id}
             label={label}
+            multiline={multiline}
             autoFocus={autoFocus}
             onChange={onChange}
             type={type}
@@ -67,6 +71,26 @@ const FormElement = (
 
                 </label>
             </div>
+        )
+    }
+
+    if (type === 'checkbox') {
+        field = (
+            <label style={{
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer'
+            }}>
+                <Checkbox
+                    checked={value}
+                    onChange={onChange}
+                    name={name}
+                    inputProps={{'aria-label': 'primary checkbox'}}
+                />
+                <Typography variant='h6'>
+                    {label}
+                </Typography>
+            </label>
         )
     }
 

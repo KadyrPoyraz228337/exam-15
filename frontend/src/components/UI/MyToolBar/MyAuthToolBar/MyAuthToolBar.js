@@ -7,6 +7,8 @@ import Menu from "@material-ui/core/Menu";
 import Divider from "@material-ui/core/Divider";
 import MenuItem from "@material-ui/core/MenuItem";
 import {logoutUserRequest} from "../../../../store/actions/usersActions";
+import Button from "@material-ui/core/Button";
+import {NavLink} from "react-router-dom";
 
 const MyAuthToolBar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,6 +31,9 @@ const MyAuthToolBar = () => {
     };
     return (
         <div>
+            <Button color='inherit' component={NavLink} to='/places/add'>
+                Add new place
+            </Button>
             <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"

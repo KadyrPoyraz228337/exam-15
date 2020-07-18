@@ -7,6 +7,8 @@ import MainPage from "./components/MainPage/MainPage";
 import Login from "./components/Login/Login";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from "./HOC/PrivatRoute/PrivatRoute";
+import AddPlace from "./components/AddPlace/AddPlace";
 
 function App() {
     return (
@@ -16,7 +18,8 @@ function App() {
             <Switch>
                 <Route path='/register' exact component={Register}/>
                 <Route path='/login' exact component={Login}/>
-                <Route path='/' exact component={MainPage}/>
+                <PrivateRoute path='/' exact component={MainPage} role='admin'/>
+                <PrivateRoute path='/places/add' exact component={AddPlace}/>
             </Switch>
         </div>
     );
