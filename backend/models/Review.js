@@ -33,6 +33,10 @@ const ReviewSchema = new mongoose.Schema({
         type: Number,
         validate: ratingValidator,
         required: true
+    },
+    date: {
+        type: Date,
+        default: new Date()
     }
 })
 

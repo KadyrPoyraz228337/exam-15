@@ -72,11 +72,12 @@ const AddPlace = () => {
                                     onChange={inputChangeHandler}
                                 />
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item>
                                 <FormElement
                                     type='image'
                                     label='Main photo'
                                     name='image'
+                                    value={place.image}
                                     onChange={fileChangeHandler}
                                 />
                             </Grid>

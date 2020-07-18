@@ -14,6 +14,8 @@ router.post('/:id', isAuth, upload.single('image'), async (req, res) => {
         const {id} = req.params;
         const {_id} = req.currentUser
 
+        if (image === 'null') return res.status(400).send({message: 'Image not filled'})
+
         if (req.file) image = req.file.filename
 
         const place = await Place.findById(id);
@@ -22,7 +24,19 @@ router.post('/:id', isAuth, upload.single('image'), async (req, res) => {
 
         const picture = await Image.create({image, user: _id, place: place._id})
 
+        console.log(1);
+
         res.send(picture)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
+router.get('/', isAuth, async (req, res) => {
+    try {
+        const images = await Image.find()
+
+        res.send(images)
     } catch (e) {
         res.status(500).send(e)
     }
@@ -36,9 +50,23 @@ router.delete('/:id', isAuth, permit('admin'), async (req, res) => {
 
         if (!picture) return res.status(404).send({message: 'Place not found'})
 
-        picture.delete()
+        await picture.delete()
 
         res.send(picture)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
+router.get('/:id', isAuth, async (req, res) => {
+    try {
+        const {id} = req.params
+
+        console.log(id);
+
+        const images = await Image.find({place: id})
+
+        res.send(images)
     } catch (e) {
         res.status(500).send(e)
     }

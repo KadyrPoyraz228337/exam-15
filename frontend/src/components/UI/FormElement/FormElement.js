@@ -10,6 +10,8 @@ import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        display: "flex",
+        alignItems: "center",
         '& > *': {
             margin: theme.spacing(1),
         },
@@ -72,6 +74,9 @@ const FormElement = (
                     </Button>
 
                 </label>
+                <Typography>
+                    {value?.name || 'No file chosen'}
+                </Typography>
             </div>
         )
     }

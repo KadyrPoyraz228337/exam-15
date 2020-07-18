@@ -75,7 +75,7 @@ const Register = () => {
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={submitHandler}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
                             <FormElement
                                 error={error}
                                 helperText='User width this username already exist'
@@ -88,7 +88,7 @@ const Register = () => {
                                 autoFocus
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
                             <FormElement
                                 variant="outlined"
                                 onChange={inputChangeHandler}
@@ -98,14 +98,7 @@ const Register = () => {
                                 name="name"
                             />
                         </Grid>
-                        <Grid item xs={12} sm={2}>
-                            <FormElement
-                                type='image'
-                                name='avatar'
-                                onChange={fileChangeHandler}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={10}>
+                        <Grid item xs={12}>
                             <FormElement
                                 variant="outlined"
                                 onChange={inputChangeHandler}
@@ -114,6 +107,14 @@ const Register = () => {
                                 label="Password"
                                 name="password"
                                 type="password"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormElement
+                                type='image'
+                                name='avatar'
+                                value={user.avatar}
+                                onChange={fileChangeHandler}
                             />
                         </Grid>
                     </Grid>

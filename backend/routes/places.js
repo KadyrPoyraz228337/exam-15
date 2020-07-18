@@ -56,4 +56,18 @@ router.get('/', isAuth, async (req, res) => {
     }
 })
 
+router.get('/:id', isAuth, async (req, res) => {
+    try {
+        const {id} = req.params
+
+        const place = await Place.findById(id)
+
+        if (!place) return res.status(404).send({message: 'Place not found'})
+
+        res.send(place)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 module.exports = router;

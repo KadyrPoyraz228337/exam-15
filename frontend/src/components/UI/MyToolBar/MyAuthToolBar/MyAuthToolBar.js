@@ -31,7 +31,7 @@ const MyAuthToolBar = () => {
     };
     return (
         <div>
-            <Button color='inherit' component={NavLink} to='/places/add'>
+            <Button color='inherit' component={NavLink} to='/add/places'>
                 Add new place
             </Button>
             <IconButton

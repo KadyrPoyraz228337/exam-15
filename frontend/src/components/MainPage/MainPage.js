@@ -5,22 +5,29 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import PlaceItem from "./PlaceItem/PlaceItem";
+import {getAllReviewsRequest} from "../../store/actions/reviewsActions";
+import {getAllImagesRequest} from "../../store/actions/imagesActions";
 
 const MainPage = () => {
 
     const dispatch = useDispatch()
     const places = useSelector(state => state.places.places)
+    const reviews = useSelector(state => state.reviews.allReviews)
+    const images = useSelector(state => state.images.allImages)
 
     const deletePlace = id => {
         dispatch(deletePlaceRequest(id))
         dispatch(getPlacesRequest())
+        dispatch(getAllReviewsRequest())
     }
 
     useEffect(() => {
         dispatch(getPlacesRequest())
+        dispatch(getAllReviewsRequest())
+        dispatch(getAllImagesRequest())
     }, [dispatch])
 
-    return places && (
+    return places && reviews && images && (
         <Container>
             <Grid container direction='column' spacing={2}>
                 <Grid item>
@@ -39,6 +46,8 @@ const MainPage = () => {
                                     image={place.image}
                                     title={place.title}
                                     rating={place.rating}
+                                    reviews={reviews.filter(review => review.place.toString() === place._id.toString()).length}
+                                    photos={images.filter(image => image.place.toString() === place._id.toString()).length}
                                 />
                             </Grid>
                         )

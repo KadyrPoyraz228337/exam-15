@@ -30,8 +30,8 @@ function* loginUser({userData}) {
 function* logoutUser() {
     try {
         yield axiosApi.delete('/users/sessions')
-        yield put(logoutUserSuccess())
         yield put(push('/login'))
+        yield put(logoutUserSuccess())
         toast.info('🦄Logout successful!', toastConfig);
     } catch (e) {
         yield put(logoutUserSuccess())

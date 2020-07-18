@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import {apiURL} from "../../../config";
 import checkRole from "../../../checkRole";
 import FormElement from "../../UI/FormElement/FormElement";
+import {NavLink} from "react-router-dom";
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
     root: {
@@ -18,6 +21,10 @@ const useStyles = makeStyles({
     media: {
         height: 140,
     },
+    photo: {
+        display: 'flex',
+        alignItems: 'center'
+    }
 });
 
 const PlaceItem = (
@@ -28,7 +35,7 @@ const PlaceItem = (
 
     return (
         <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea component={NavLink} to={'/places/'+id}>
                 <CardMedia
                     className={classes.media}
                     image={apiURL.url + '/uploads/' + image}
@@ -40,8 +47,20 @@ const PlaceItem = (
                     </Typography>
                     <FormElement
                         type='rating'
+                        readOnly
                         value={rating}
                     />
+                    <Typography gutterBottom variant="h5" component="h4">
+                        ({rating}, {reviews})
+                    </Typography>
+                    <div className={classes.photo}>
+                        <PhotoCameraIcon/>
+                        <Box ml={1}>
+                            <Typography gutterBottom variant="h5" component="h4" style={{margin: '0'}}>
+                                {photos} photos
+                            </Typography>
+                        </Box>
+                    </div>
                 </CardContent>
             </CardActionArea>
             {checkRole('admin') && (

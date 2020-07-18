@@ -16,5 +16,5 @@ module.exports = async function (id) {
     }, {qualityOfFood: 0, serviceQuality: 0, interior: 0})
     result.rating = roundUp((result.qualityOfFood + result.serviceQuality + result.interior) / 3)
 
-    await Place.update({_id: id}, result)
+    await Place.updateOne({_id: id}, result)
 }
