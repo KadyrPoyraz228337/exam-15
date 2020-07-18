@@ -9,6 +9,18 @@ const router = express.Router();
 
 // qualityOfFood, serviceQuality, interior
 
+router.get('/:id', isAuth, async (req, res) => {
+    try {
+        const {id} = req.params
+
+        const reviews = await Review.find({place: id})
+
+        res.send(reviews)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 router.post('/:id', isAuth, async (req, res) => {
     try {
         const {text, qualityOfFood, serviceQuality, interior} = req.body
