@@ -11,7 +11,10 @@ const ImageSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    image: String,
+    image: {
+        type: String,
+        required: true
+    },
 })
 
 const modelName = 'Image'
