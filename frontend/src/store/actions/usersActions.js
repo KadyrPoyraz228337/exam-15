@@ -43,8 +43,8 @@ export const loginUserRequest = userData => async dispatch => {
 
 export const logoutUserRequest = () => async dispatch => {
     try {
-        await axiosApi.delete('/users/sessions')
         dispatch(push('/login'))
+        await axiosApi.delete('/users/sessions')
         dispatch(logoutUserSuccess())
         toast.info('🦄Logout successful!', toastConfig);
     } catch (e) {
