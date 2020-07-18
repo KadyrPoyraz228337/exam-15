@@ -31,6 +31,7 @@ const PLaceRatingBoard = (
                         name='Overall'
                         readOnly
                     />
+                    <Typography>{rating}</Typography>
                 </div>
             </Grid>}
             <Grid item xs={3}>
@@ -42,6 +43,7 @@ const PLaceRatingBoard = (
                         name='qualityOfFood'
                         readOnly
                     />
+                    <Typography>{qualityOfFood}</Typography>
                 </div>
             </Grid>
             <Grid item xs={3}>
@@ -53,6 +55,7 @@ const PLaceRatingBoard = (
                         name='serviceQuality'
                         readOnly
                     />
+                    <Typography>{serviceQuality}</Typography>
                 </div>
             </Grid>
             <Grid item xs={3}>
@@ -64,6 +67,7 @@ const PLaceRatingBoard = (
                         name='interior'
                         readOnly
                     />
+                    <Typography>{interior}</Typography>
                 </div>
             </Grid>
         </Grid>

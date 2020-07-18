@@ -28,13 +28,13 @@ const useStyles = makeStyles({
 });
 
 const PlaceItem = (
-    {title, image, rating, reviews, photos, deletePlace, id}
+    {title, image, rating, reviews, photos, deletePlace, id, index}
 ) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
-            <CardActionArea component={NavLink} to={'/places/'+id}>
+            <CardActionArea component={NavLink} to={'/places/'+id} id={title+index}>
                 <CardMedia
                     className={classes.media}
                     image={apiURL.url + '/uploads/' + image}

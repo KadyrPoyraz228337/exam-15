@@ -91,6 +91,7 @@ const FormElement = (
                 <Checkbox
                     checked={value}
                     onChange={onChange}
+                    id={id}
                     name={name}
                     inputProps={{'aria-label': 'primary checkbox'}}
                 />

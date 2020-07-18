@@ -36,11 +36,12 @@ const MainPage = () => {
                     </Typography>
                 </Grid>
                 <Grid container spacing={1}>
-                    {places.map(place => {
+                    {places.map((place, index) => {
                         return (
                             <Grid item xs={3} key={place._id}>
                                 <PlaceItem
                                     id={place._id}
+                                    index={index}
                                     deletePlace={deletePlace}
                                     image={place.image}
                                     title={place.title}

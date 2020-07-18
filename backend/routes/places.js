@@ -43,7 +43,6 @@ router.delete('/:id', isAuth, permit('admin'), async (req, res) => {
 
         res.send(place)
     } catch (e) {
-        console.log(e);
         res.status(500).send(e)
     }
 })
@@ -52,7 +51,7 @@ router.get('/', isAuth, async (req, res) => {
     try {
         const places = await Place.find()
 
-        res.send(places)
+        res.send(places.reverse())
     } catch (e) {
         res.status(500).send(e)
     }

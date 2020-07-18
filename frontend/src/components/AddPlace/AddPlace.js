@@ -86,6 +86,7 @@ const AddPlace = () => {
                                     type='checkbox'
                                     label='I understand'
                                     name='licenseAgreement'
+                                    id='checkbox'
                                     onChange={checkboxChangeHandler}
                                 />
                             </Grid>
@@ -95,7 +96,13 @@ const AddPlace = () => {
                                 </Alert>
                             </Grid>}
                             <Grid item xs={3}>
-                                <Button variant='contained' type='submit' color='primary' disabled={!place.licenseAgreement}>
+                                <Button
+                                    variant='contained'
+                                    type='submit'
+                                    color='primary'
+                                    disabled={!place.licenseAgreement}
+                                    id='addPlace'
+                                >
                                     Submit new place
                                 </Button>
                             </Grid>
