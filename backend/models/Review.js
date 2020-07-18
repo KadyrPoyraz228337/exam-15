@@ -7,41 +7,35 @@ const ratingValidator = {
     message: props => `${props.value} is not a valid rating!`
 }
 
-const RecipeSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
+const ReviewSchema = new mongoose.Schema({
+    text: {
+        type: String
     },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     },
-    image: String,
-    description: {
-        type: String,
-        required: true
-    },
-    rating: {
-        type: Number,
-        default: 0
+    place: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Place'
     },
     qualityOfFood: {
         type: Number,
         validate: ratingValidator,
-        default: 0
+        required: true
     },
     serviceQuality: {
         type: Number,
         validate: ratingValidator,
-        default: 0
+        required: true
     },
     interior: {
         type: Number,
         validate: ratingValidator,
-        default: 0
+        required: true
     }
 })
 
-const modelName = 'Place'
+const modelName = 'Review'
 
-module.exports = mongoose.model(modelName, RecipeSchema);
+module.exports = mongoose.model(modelName, ReviewSchema);
