@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
+import Rating from "@material-ui/lab/Rating";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +26,7 @@ const FormElement = (
     {
         name, variant, required, id, label, autoFocus,
         onChange, type, autoComplete, error, helperText,
-        margin, multiline, value
+        margin, multiline, value, readOnly
     }
 ) => {
     const classes = useStyles();
@@ -91,6 +93,20 @@ const FormElement = (
                     {label}
                 </Typography>
             </label>
+        )
+    }
+
+    if (type === 'rating') {
+        field = (
+            <Box component="fieldset" borderColor="transparent">
+                {label &&<Typography component="legend">{label}</Typography>}
+                <Rating
+                    name={name}
+                    readOnly={readOnly}
+                    value={value}
+                    onChange={(event, newValue) => onChange(event, newValue)}
+                />
+            </Box>
         )
     }
 

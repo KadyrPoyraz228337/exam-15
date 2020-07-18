@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {apiURL} from "../../../config";
 import checkRole from "../../../checkRole";
+import FormElement from "../../UI/FormElement/FormElement";
 
 const useStyles = makeStyles({
     root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const PlaceItem = (
-    {title, image, rating, reviews, photos, description}
+    {title, image, rating, reviews, photos, deletePlace, id}
 ) => {
     const classes = useStyles();
     console.log(image);
@@ -37,14 +38,15 @@ const PlaceItem = (
                     <Typography gutterBottom variant="h5" component="h2">
                         {title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {description}
-                    </Typography>
+                    <FormElement
+                        type='rating'
+                        value={rating}
+                    />
                 </CardContent>
             </CardActionArea>
             {checkRole('admin') && (
                 <CardActions>
-                    <Button size="small" color="secondary" variant='contained'>
+                    <Button size="small" color="secondary" variant='contained' onClick={() => deletePlace(id)}>
                         delete
                     </Button>
                 </CardActions>

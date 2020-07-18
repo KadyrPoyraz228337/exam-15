@@ -1,7 +1,7 @@
 import axiosApi from '../../axiosApi'
 import {put, takeEvery} from "@redux-saga/core/effects";
 import {
-    ADD_PLACE_REQUEST,
+    ADD_PLACE_REQUEST, DELETE_PLACE_REQUEST,
     GET_PLACES_REQUEST,
     GET_PLACES_SUCCESS,
     LOGIN_USER_REQUEST,
@@ -32,7 +32,16 @@ function* addPlace({place}) {
     }
 }
 
+function* deletePlace({place}) {
+    try {
+        yield axiosApi.delete('/places/'+place)
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export default [
     takeEvery(GET_PLACES_REQUEST, getPlaces),
     takeEvery(ADD_PLACE_REQUEST, addPlace),
+    takeEvery(DELETE_PLACE_REQUEST, deletePlace),
 ]
