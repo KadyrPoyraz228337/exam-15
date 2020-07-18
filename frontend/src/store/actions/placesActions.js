@@ -1,20 +1,47 @@
-import {
-    ADD_PLACE_FAILURE,
-    ADD_PLACE_REQUEST,
-    DELETE_PLACE_REQUEST, GET_PLACE_REQUEST, GET_PLACE_SUCCESS,
-    GET_PLACES_REQUEST,
-    GET_PLACES_SUCCESS, PLACE_INIT
-} from "./actionsTypes";
+import {ADD_PLACE_FAILURE, GET_PLACE_SUCCESS, GET_PLACES_SUCCESS, PLACE_INIT} from "./actionsTypes";
+import axiosApi from "../../axiosApi";
+import {push} from 'connected-react-router'
 
-export const getPlacesRequest = () => ({type: GET_PLACES_REQUEST})
 export const getPlacesSuccess = places => ({type: GET_PLACES_SUCCESS, places})
 
-export const getPlaceRequest = id => ({type: GET_PLACE_REQUEST, id})
 export const getPlaceSuccess = place => ({type: GET_PLACE_SUCCESS, place})
 
-export const addPlaceRequest = place => ({type: ADD_PLACE_REQUEST, place})
 export const addPlaceFailure = error => ({type: ADD_PLACE_FAILURE, error})
 
-export const deletePlaceRequest = place => ({type: DELETE_PLACE_REQUEST, place})
-
 export const placeInit = () => ({type: PLACE_INIT})
+
+
+export const getPlaceRequest = id => async dispatch => {
+    try {
+        const places = await axiosApi.get('/places/'+id)
+        dispatch(getPlaceSuccess(places.data))
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const getPlacesRequest = () => async dispatch => {
+    try {
+        const places = await axiosApi.get('/places')
+        dispatch(getPlacesSuccess(places.data))
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const addPlaceRequest = place => async dispatch => {
+    try {
+        await axiosApi.post('/places', place)
+        dispatch(push('/'))
+    } catch (e) {
+        dispatch(addPlaceFailure(e))
+    }
+}
+
+export const deletePlaceRequest = place => async () => {
+    try {
+        await axiosApi.delete('/places/'+place)
+    } catch (e) {
+        console.log(e);
+    }
+}

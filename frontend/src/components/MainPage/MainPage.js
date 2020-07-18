@@ -15,10 +15,10 @@ const MainPage = () => {
     const reviews = useSelector(state => state.reviews.allReviews)
     const images = useSelector(state => state.images.allImages)
 
-    const deletePlace = id => {
-        dispatch(deletePlaceRequest(id))
-        dispatch(getPlacesRequest())
-        dispatch(getAllReviewsRequest())
+    const deletePlace = async id => {
+        await dispatch(deletePlaceRequest(id))
+        await dispatch(getPlacesRequest())
+        await dispatch(getAllReviewsRequest())
     }
 
     useEffect(() => {
@@ -38,9 +38,8 @@ const MainPage = () => {
                 <Grid container spacing={1}>
                     {places.map(place => {
                         return (
-                            <Grid item xs={3}>
+                            <Grid item xs={3} key={place._id}>
                                 <PlaceItem
-                                    key={place._id}
                                     id={place._id}
                                     deletePlace={deletePlace}
                                     image={place.image}

@@ -18,10 +18,10 @@ app.use(express.static('public'));
 const run = async () => {
     await mongoose.connect(config.database, config.databaseOptions);
 
-    app.use('/users', users)
-    app.use('/places', places)
     app.use('/reviews', reviews)
     app.use('/images', images)
+    app.use('/users', users)
+    app.use('/places', places)
 
     app.listen(config.port)
 };

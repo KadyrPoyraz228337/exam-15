@@ -31,7 +31,6 @@ const PlaceItem = (
     {title, image, rating, reviews, photos, deletePlace, id}
 ) => {
     const classes = useStyles();
-    console.log(image);
 
     return (
         <Card className={classes.root}>

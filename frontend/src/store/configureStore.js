@@ -3,8 +3,8 @@ import {applyMiddleware, compose, createStore} from "redux";
 import {routerMiddleware} from 'connected-react-router'
 import createSagaMiddleware from 'redux-saga'
 import {loadFromLocalStorage, localStorageMiddleware} from "./localStorage";
-import rootSaga from "./rootSaga";
 import createRootReducer from './reducers'
+import thunk from "redux-thunk";
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware()
@@ -12,6 +12,7 @@ const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middleware = [
+    thunk,
     routerMiddleware(history),
     sagaMiddleware,
     localStorageMiddleware
@@ -24,7 +25,5 @@ const persistedState = loadFromLocalStorage();
 export const store = createStore(createRootReducer(history), persistedState, enhancers);
 
 store.replaceReducer(createRootReducer(history))
-
-sagaMiddleware.run(rootSaga)
 
 export default store;

@@ -1,19 +1,44 @@
-import {
-    ADD_IMAGE_FAILURE,
-    ADD_IMAGE_REQUEST,
-    DELETE_IMAGE_REQUEST,
-    GET_ALL_IMAGES_REQUEST, GET_ALL_IMAGES_SUCCESS,
-    GET_IMAGES_REQUEST,
-    GET_IMAGES_SUCCESS
-} from "./actionsTypes";
+import {ADD_IMAGE_FAILURE, GET_ALL_IMAGES_SUCCESS, GET_IMAGES_SUCCESS} from "./actionsTypes";
+import axiosApi from "../../axiosApi";
 
-export const getAllImagesRequest = () => ({type: GET_ALL_IMAGES_REQUEST})
 export const getAllImagesSuccess = images => ({type: GET_ALL_IMAGES_SUCCESS, images})
 
-export const getImagesRequest = id => ({type: GET_IMAGES_REQUEST, id})
 export const getImagesSuccess = images => ({type: GET_IMAGES_SUCCESS, images})
 
-export const addImageRequest = (image, id) => ({type: ADD_IMAGE_REQUEST, image, id})
 export const addImageFailure = error => ({type: ADD_IMAGE_FAILURE, error})
 
-export const deleteImageRequest = id => ({type: DELETE_IMAGE_REQUEST, id})
+export const getAllImagesRequest = () => async dispatch => {
+    try {
+        const images = await axiosApi.get('/images')
+        dispatch(getAllImagesSuccess(images.data))
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const getImagesRequest = id => async dispatch => {
+    try {
+        const images = await axiosApi.get('/images/'+id)
+        dispatch(getImagesSuccess(images.data))
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const addImageRequest = (image, id) => async dispatch => {
+    try {
+        await axiosApi.post('/images/'+id, image)
+    } catch (e) {
+        dispatch(addImageFailure(e))
+    }
+}
+
+export const deleteImageRequest = id => async () => {
+    try {
+        console.log('1 delete');
+        await axiosApi.delete('/images/'+id)
+        console.log('2 delete');
+    } catch (e) {
+        console.log(e);
+    }
+}

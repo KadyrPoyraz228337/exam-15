@@ -35,6 +35,8 @@ router.delete('/:id', isAuth, permit('admin'), async (req, res) => {
 
         if (!place) return res.status(404).send({message: 'Place not found'})
 
+        console.log(place);
+
         fs.unlinkSync(config.uploadPath+'/'+place.image)
 
         await place.delete()

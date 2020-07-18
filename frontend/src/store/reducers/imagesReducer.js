@@ -1,9 +1,4 @@
-import {
-    ADD_IMAGE_FAILURE,
-    ADD_IMAGE_REQUEST,
-    GET_ALL_IMAGES_SUCCESS,
-    GET_IMAGES_SUCCESS
-} from "../actions/actionsTypes";
+import {ADD_IMAGE_FAILURE, GET_ALL_IMAGES_SUCCESS, GET_IMAGES_SUCCESS} from "../actions/actionsTypes";
 
 const INITIAL_STATE = {
     images: null,

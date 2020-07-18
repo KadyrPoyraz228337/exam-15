@@ -8,7 +8,6 @@ import {apiURL} from "../../config";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import {deleteImageRequest, getImagesRequest} from "../../store/actions/imagesActions";
-import FormElement from "../UI/FormElement/FormElement";
 import {deleteReviewRequest, getReviewsRequest} from "../../store/actions/reviewsActions";
 import PLaceRatingBoard from "./PLaceRatingBoard/PLaceRatingBoard";
 import Button from "@material-ui/core/Button";
@@ -43,17 +42,16 @@ const Place = () => {
         await dispatch(getReviewsRequest(id))
         await dispatch(getPlaceRequest(id))
     }
-    const deleteImage = imageId => {
-        dispatch(deleteImageRequest(imageId))
-        dispatch(getImagesRequest(id))
+    const deleteImage = async imageId => {
+        await dispatch(deleteImageRequest(imageId))
+        await dispatch(getImagesRequest(id))
     }
 
     useEffect(() => {
         dispatch(getReviewsRequest(id))
         dispatch(getImagesRequest(id))
         dispatch(getPlaceRequest(id))
-
-    }, [dispatch])
+    }, [dispatch, id])
 
     return place && images && reviews && (
         <Container>
@@ -77,37 +75,6 @@ const Place = () => {
                         <img src={apiURL.url + '/uploads/' + place.image} alt="" className={classes.image}/>
                     </Grid>
                 </Grid>
-                {images.length > 0 && <Grid container direction='column'>
-                    <Grid item>
-                        <Typography variant='h4'>
-                            Gallery
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Paper>
-                            <Box p={3}>
-                                <Grid container>
-                                    {images.map(image => {
-                                        return (
-                                            <Grid item key={image._id} xs={3}>
-                                                <div className={classes.imageItem}>
-                                                    <img src={apiURL.url + '/uploads/' + image.image} alt=""
-                                                         style={{width: '100%'}}/>
-                                                    {checkRole('admin') && (
-                                                        <Button color='secondary' variant='contained'
-                                                                onClick={() => deleteImage(image._id)}>
-                                                            Delete
-                                                        </Button>
-                                                    )}
-                                                </div>
-                                            </Grid>
-                                        )
-                                    })}
-                                </Grid>
-                            </Box>
-                        </Paper>
-                    </Grid>
-                </Grid>}
                 <Grid container direction='column' spacing={2}>
                     <Grid item>
                         <Typography variant='h4'>
@@ -181,6 +148,37 @@ const Place = () => {
                     <AddPlaceRating/>
                 )}
                 <AddPlaceImage currentId={id}/>
+                {images.length > 0 && <Grid container direction='column'>
+                    <Grid item>
+                        <Typography variant='h4'>
+                            Gallery
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Paper>
+                            <Box p={3}>
+                                <Grid container>
+                                    {images.map(image => {
+                                        return (
+                                            <Grid item key={image._id} xs={3}>
+                                                <div className={classes.imageItem}>
+                                                    <img src={apiURL.url + '/uploads/' + image.image} alt=""
+                                                         style={{width: '100%'}}/>
+                                                    {checkRole('admin') && (
+                                                        <Button color='secondary' variant='contained'
+                                                                onClick={() => deleteImage(image._id)}>
+                                                            Delete
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                            </Grid>
+                                        )
+                                    })}
+                                </Grid>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </Grid>}
             </Grid>
         </Container>
     );

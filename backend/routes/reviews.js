@@ -1,13 +1,10 @@
 const express = require('express')
 
 const isAuth = require('../middlewares/isAuth')
-const permit = require('../middlewares/permit')
 const Review = require('../models/Review');
 const updateRating = require('../service/updateRating')
 
 const router = express.Router();
-
-// qualityOfFood, serviceQuality,
 
 router.get('/', isAuth, async (req, res) => {
     try {
@@ -40,11 +37,8 @@ router.post('/:id', isAuth, async (req, res) => {
         if (!qualityOfFood || !serviceQuality || !interior || !text) return res.status(404).send({message: 'All fields must be filled'})
 
         const hasReview = await Review.findOne({user: _id, place: id})
-        // const recipe = await Recipe.findById(id)
 
-        // if (!recipe) return res.status(404).send({message: 'Recipe not found'})
-        // if (recipe.user.toString() === _id.toString()) return res.status(400).send({message: 'You can not add comment in you recipe'})
-        if (hasReview) return res.status(400).send({message: 'You already add review'})
+        if (hasReview) return res.statudeletes(400).send({message: 'You already add review'})
 
         const review = await Review.create({text, qualityOfFood, serviceQuality, interior, place: id, user: _id})
 
@@ -65,7 +59,7 @@ router.delete('/:id', isAuth, async (req, res) => {
 
         if (!review) return res.status(404).send({message: 'Review not found'})
         if (review.user._id.toString() === _id.toString() || role === 'admin') {
-            await review.delete()
+            await Review.deleteOne({_id: review._id})
 
             await updateRating(id)
 

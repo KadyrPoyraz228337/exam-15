@@ -25,10 +25,11 @@ const AddPlaceImage = (
     const submitHandler = async e => {
         e.preventDefault()
 
-        const data = new FormData
+        const data = new FormData()
         data.append('image', image.image)
         await dispatch(addImageRequest(data, id))
         await dispatch(getImagesRequest(currentId))
+        setImage({...image, image: null})
     }
 
     return (

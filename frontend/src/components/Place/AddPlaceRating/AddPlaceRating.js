@@ -9,7 +9,6 @@ import {addReviewRequest, getReviewsRequest} from "../../../store/actions/review
 import {useParams} from 'react-router-dom'
 import Alert from "@material-ui/lab/Alert";
 import {getPlaceRequest} from "../../../store/actions/placesActions";
-import {getImagesRequest} from "../../../store/actions/imagesActions";
 
 const useStyles = makeStyles({
     ratingBlock: {

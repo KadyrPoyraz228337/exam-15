@@ -26,7 +26,7 @@ const AddPlace = () => {
     const submitHandler = e => {
         e.preventDefault()
 
-        const data = new FormData
+        const data = new FormData()
 
         Object.keys(place).forEach(placeItem => {
             data.append(placeItem, place[placeItem])
