@@ -10,7 +10,7 @@
     И я нахожусь на странице добавления места
     Если я заполняю поля формы:
       | title       | Some |
-      | description | 123   |
+      | description | 123       |
     И нажимаю на кнопку "#checkbox"
     И нажимаю на кнопку "#addPlace"
     То я вижу текст "Some"
@@ -24,15 +24,8 @@
     Если нажимаю на кнопку "#Some0"
     Если я заполняю поля формы:
       | text      | Some text |
-  И нажимаю на кнопку ".MuiRating-label"
-  И нажимаю на кнопку ".MuiRating-label"
-  И нажимаю на кнопку ".MuiRating-label"
-#  И нажимаю на кнопку "#serviceQuality-2"
-#  И нажимаю на кнопку "#interior-4"
-  И я жду
-#    Если я заполняю поля формы:
-#      | title       | Some text |
-#      | description | 123       |
-#    И нажимаю на кнопку "#checkbox"
-#    И нажимаю на кнопку "#addPlace"
-#    То я вижу текст "Some text"
+  И нажимаю на кнопку "label[for=qualityOfFood-3]"
+  И нажимаю на кнопку "label[for=serviceQuality-1]"
+  И нажимаю на кнопку "label[for=interior-1]"
+    И нажимаю на кнопку "#submit"
+    То я вижу текст "1.7"

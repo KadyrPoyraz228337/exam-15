@@ -98,7 +98,7 @@ const AddPlaceRating = () => {
                             </div>
                         </Grid>
                         <Grid item>
-                            <Button variant='contained' color='primary' type='submit'>
+                            <Button variant='contained' color='primary' type='submit' id='submit'>
                                 Submit review
                             </Button>
                         </Grid>
