@@ -12,8 +12,10 @@ const router = express.Router();
 
 router.post('/', isAuth, upload.single('image'), async (req, res) => {
     try {
-        let {title, image, description, qualityOfFood, serviceQuality, interior} = req.body;
+        let {title, image, description, qualityOfFood, serviceQuality, interior, licenseAgreement} = req.body;
         const {_id} = req.currentUser
+
+        if (!licenseAgreement) return res.status(400).send({message: 'LicenseAgreement must be true'})
 
         if (req.file) image = req.file.filename
 
